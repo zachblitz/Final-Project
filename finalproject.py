@@ -177,6 +177,18 @@ def unique(x,y):
 			return False
 	return True
 
+
+twitter_data_users = 'user_cache.json'
+
+try:
+	user_cache_file = open(twitter_data_users, 'r')
+	user_cache_contents = user_cache_file.read()
+	user_cache_diction = json.loads(user_cache_contents)
+
+except:
+	user_cache_diction = {}
+
+
 twitter_user_data = []
 
 for tweet in twitter_results_1: #getting info on user who tweeted it
@@ -196,6 +208,15 @@ for tweet in twitter_results_1: #getting info on user's mentioned in tweets
 	mentions = tweet["entities"]["user_mentions"]
 	for name in mentions:
 		user = api.get_user(name["screen_name"])
+
+
+
+		if name["screen_name"] not in user_cache_diction:
+			user_cache_diction[name["screen_name"]] = user
+			user_cache_file = open(twitter_data_users, 'w')
+			user_cache_file.write(json.dumps(user_cache_diction))
+			user_cache_file.close()
+
 		user_id = user['id_str']
 		screen_name = user['screen_name']
 		favorites = user['favourites_count']
@@ -225,6 +246,13 @@ for tweet in twitter_results_2: #getting info on user's mentioned in tweets
 	mentions = tweet["entities"]["user_mentions"]
 	for name in mentions:
 		user = api.get_user(name["screen_name"])
+
+		if name["screen_name"] not in user_cache_diction:
+			user_cache_diction[name["screen_name"]] = user
+			user_cache_file = open(twitter_data_users, 'w')
+			user_cache_file.write(json.dumps(user_cache_diction))
+			user_cache_file.close()
+
 		user_id = user['id_str']
 		screen_name = user['screen_name']
 		favorites = user['favourites_count']
@@ -254,6 +282,13 @@ for tweet in twitter_results_3: #getting info on user's mentioned in tweets
 	mentions = tweet["entities"]["user_mentions"]
 	for name in mentions:
 		user = api.get_user(name["screen_name"])
+
+		if name["screen_name"] not in user_cache_diction:
+			user_cache_diction[name["screen_name"]] = user
+			user_cache_file = open(twitter_data_users, 'w')
+			user_cache_file.write(json.dumps(user_cache_diction))
+			user_cache_file.close()
+
 		user_id = user['id_str']
 		screen_name = user['screen_name']
 		favorites = user['favourites_count']
@@ -308,6 +343,8 @@ statement3 = 'INSERT INTO Users VALUES (?,?,?,?,?,?,?,?)'
 for user in twitter_user_data:
 	cur.execute(statement3, user)
 conn.commit()
+
+
 
 ################################## data processing techniques ###########################
 
