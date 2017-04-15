@@ -393,7 +393,7 @@ try:
 		else:
 			location_dictionary[x[1]] +=1
 
-	data_2 = "Here are the counts of locations of where people tweet about your favorite movies:\n\n  " + str(location_dictionary) + "\n\n"
+	data_2 = "Here are the counts of locations of where people tweet or are mentioned in tweets about your favorite movies:\n\n  " + str(location_dictionary) + "\n\n"
 	print(data_2)
 	print('-------')
 #data processing technique 3: #collections
@@ -403,7 +403,7 @@ try:
 	for x,y in movie_locations:
 		movie_location_dictionary[x].append(y)
 
-	data_3 = "Here are movies and the locations of users who tweeted about them:\n\n " + str(movie_location_dictionary) + "\n\n"
+	data_3 = "Here are movies and the locations of users who tweeted or were mentioned in tweets about them:\n\n " + str(movie_location_dictionary) + "\n\n"
 	print(data_3)
 	print('----------')
 #data processing technique 4: #sorting
