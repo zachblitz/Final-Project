@@ -144,6 +144,7 @@ try:
 	twitter_results_2 = get_and_cache_twitter_data(twitter_search_2)
 	twitter_results_3 = get_and_cache_twitter_data(twitter_search_3)
 
+
 	def unique(x,y):
 		for tuples in y:
 			if x[0] == tuples[0]:
@@ -216,6 +217,12 @@ try:
 		if unique(user_tuple, twitter_user_data) == True:
 			twitter_user_data.append(user_tuple)
 
+		if screen_name not in user_cache_diction:
+				user_cache_diction[screen_name] = tweet['user']
+				user_cache_file = open(twitter_data_users, 'w')
+				user_cache_file.write(json.dumps(user_cache_diction))
+				user_cache_file.close()
+
 	for tweet in twitter_results_1: #getting info on user's mentioned in tweets
 		mentions = tweet["entities"]["user_mentions"]
 		for name in mentions:
@@ -254,6 +261,12 @@ try:
 		if unique(user_tuple, twitter_user_data) == True:
 			twitter_user_data.append(user_tuple)
 
+		if screen_name not in user_cache_diction:
+				user_cache_diction[screen_name] = tweet['user']
+				user_cache_file = open(twitter_data_users, 'w')
+				user_cache_file.write(json.dumps(user_cache_diction))
+				user_cache_file.close()
+
 	for tweet in twitter_results_2: #getting info on user's mentioned in tweets
 		mentions = tweet["entities"]["user_mentions"]
 		for name in mentions:
@@ -289,6 +302,12 @@ try:
 		user_tuple = (user_id, screen_name, favorites, movie_3.get_id(), followers, tweets, following, location)
 		if unique(user_tuple, twitter_user_data) == True:
 			twitter_user_data.append(user_tuple)
+
+		if screen_name not in user_cache_diction:
+				user_cache_diction[screen_name] = tweet['user']
+				user_cache_file = open(twitter_data_users, 'w')
+				user_cache_file.write(json.dumps(user_cache_diction))
+				user_cache_file.close()
 
 	for tweet in twitter_results_3: #getting info on user's mentioned in tweets
 		mentions = tweet["entities"]["user_mentions"]
